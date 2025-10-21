@@ -45,6 +45,35 @@ prot_sc <- function(pdb) {
   lst(nsites, site, pdb_site, bfactor, xyz)
 }
 
+#' set CB (beta carbon) nodes
+#'
+#' @noRd
+#'
+prot_cb <- function(pdb) {
+  # calculate xyz coordinates and b-factors for beta carbons
+  r <- residue.coordinates(pdb)
+  b <- residue.bfactors(pdb)
+
+  pdb_site <- r$site
+  nsites <- length(r$site)
+  site <- seq(length(r$site))
+
+  # Use CB coordinates when available, fall back to Levitt's approximation for glycines,
+  # then CA for terminal residues
+  xyz <- r$cb.xyz
+  xyz_na <- is.na(xyz)
+  xyz[xyz_na] <- r$l.xyz[xyz_na]  # Levitt's approximation for glycines
+  xyz_na <- is.na(xyz)
+  xyz[xyz_na] <- r$ca.xyz[xyz_na]  # CA for terminal residues where Levitt fails
+
+  # Similar fallback pattern for B-factors
+  bfactor <- b$b.b  # CB bfactors when available
+  bfactor[is.na(bfactor)] <- b$b.l[is.na(bfactor)]  # Levitt bfactors for glycines
+  bfactor[is.na(bfactor)] <- b$b.a[is.na(bfactor)]  # CA bfactors as final fallback
+
+  lst(nsites, site, pdb_site, bfactor, xyz)
+}
+
 
 #' Various residue coordinates
 #'

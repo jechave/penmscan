@@ -8,7 +8,7 @@
 #' `set_enm` set's up a `prot` object containing information on ENM structure, parameters, and normal modes
 #'
 #' @param pdb   pdb object obtained using bio3d::read.pdb
-#' @param node  parameter specifying how network nodes should be built: "sc" (side chains) or "ca" (alpha carbons)
+#' @param node  parameter specifying how network nodes should be built: "sc" (side chains), "ca" (alpha carbons), or "cb" (beta carbons)
 #' @param model parameter specifying model type: "anm", "ming_wall", "hnm", "hnm0", "pfanm", "reach"
 #' @param d_max distance cutoff used to define enm contacts
 #' @param frustrated logical value indicating whether to include frustrations in calculation of kmat
@@ -22,6 +22,7 @@
 #' pdb <- bio3d::read.pdb("2acy")
 #' set_enm(pdb, node = "ca", model = "ming_wall", d_max = 10.5, frustrated = FALSE)
 #' set_enm(pdb, node = "sc", model = "anm", d_max = 12.5, frustrated = TRUE)
+#' set_enm(pdb, node = "cb", model = "anm", d_max = 12.0, frustrated = FALSE)
 #' }
 set_enm <- function(pdb, node, model, d_max, frustrated) {
 
@@ -134,7 +135,11 @@ calculate_enm_nodes <- function(pdb, node) {
     nodes <- prot_sc(pdb)
     return(nodes)
   }
-  stop("Error: node must be ca, calpha, sc, or side_chain")
+  if (node == "cb" | node == "beta") {
+    nodes <- prot_cb(pdb)
+    return(nodes)
+  }
+  stop("Error: node must be ca, calpha, sc, side_chain, cb, or beta")
 }
 
 

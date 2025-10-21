@@ -9,7 +9,7 @@ set_enm(pdb, node, model, d_max, frustrated)
 \arguments{
 \item{pdb}{pdb object obtained using bio3d::read.pdb}
 
-\item{node}{parameter specifying how network nodes should be built: "sc" (side chains) or "ca" (alpha carbons)}
+\item{node}{parameter specifying how network nodes should be built: "sc" (side chains), "ca" (alpha carbons), or "cb" (beta carbons)}
 
 \item{model}{parameter specifying model type: "anm", "ming_wall", "hnm", "hnm0", "pfanm", "reach"}
 
@@ -28,5 +28,6 @@ an object of class `prot`, which is a list `lst(param, node, graph, eij, kmat, n
 pdb <- bio3d::read.pdb("2acy")
 set_enm(pdb, node = "ca", model = "ming_wall", d_max = 10.5, frustrated = FALSE)
 set_enm(pdb, node = "sc", model = "anm", d_max = 12.5, frustrated = TRUE)
+set_enm(pdb, node = "cb", model = "anm", d_max = 12.0, frustrated = FALSE)
 }
 }
