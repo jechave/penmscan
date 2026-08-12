@@ -16,8 +16,8 @@ a matrix of size nsites x nsites \eqn{K_{ij} = Tr(\mathbf{K}_{ij})}
 Calculates the reduced K matrix (size nsites x nsites)
 }
 \seealso{
-Other site-by-site matrices: 
-\code{\link{get_reduced_cmat}()},
-\code{\link{get_rho_matrix}()}
+Other site-by-site matrices:
+\code{\link[=get_reduced_cmat]{get_reduced_cmat()}},
+\code{\link[=get_rho_matrix]{get_rho_matrix()}}
 }
 \concept{site-by-site matrices}

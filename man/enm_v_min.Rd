@@ -17,9 +17,9 @@ a scalar: the energy at the minimum-enegy conformation
 Calculate minimum energy of a given prot object
 }
 \seealso{
-Other enm_energy: 
-\code{\link{dgact_dv}()},
-\code{\link{dgact_tds}()},
-\code{\link{enm_g_entropy}()}
+Other enm_energy:
+\code{\link[=dgact_dv]{dgact_dv()}},
+\code{\link[=dgact_tds]{dgact_tds()}},
+\code{\link[=enm_g_entropy]{enm_g_entropy()}}
 }
 \concept{enm_energy}

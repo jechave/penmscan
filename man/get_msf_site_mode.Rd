@@ -16,7 +16,7 @@ a matrix of size nsites x nmodes with the msf of each site contributed by each m
 Calculate MSF site-dependent profile for each mode
 }
 \seealso{
-Other site-by-mode matrices: 
-\code{\link{get_umat2}()}
+Other site-by-mode matrices:
+\code{\link[=get_umat2]{get_umat2()}}
 }
 \concept{site-by-mode matrices}

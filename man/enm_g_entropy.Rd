@@ -15,9 +15,9 @@ enm_g_entropy(prot, beta)
 Calculate entropic total free energy of prot object
 }
 \seealso{
-Other enm_energy: 
-\code{\link{dgact_dv}()},
-\code{\link{dgact_tds}()},
-\code{\link{enm_v_min}()}
+Other enm_energy:
+\code{\link[=dgact_dv]{dgact_dv()}},
+\code{\link[=dgact_tds]{dgact_tds()}},
+\code{\link[=enm_v_min]{enm_v_min()}}
 }
 \concept{enm_energy}

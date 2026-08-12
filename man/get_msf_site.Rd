@@ -16,11 +16,11 @@ a vector of size nsites with msf values for each site
 Calculates the mean-square-fluctuation of each site
 }
 \seealso{
-Other site profiles: 
-\code{\link{get_cn}()},
-\code{\link{get_dactive}()},
-\code{\link{get_mlms}()},
-\code{\link{get_stress}()},
-\code{\link{get_wcn}()}
+Other site profiles:
+\code{\link[=get_cn]{get_cn()}},
+\code{\link[=get_dactive]{get_dactive()}},
+\code{\link[=get_mlms]{get_mlms()}},
+\code{\link[=get_stress]{get_stress()}},
+\code{\link[=get_wcn]{get_wcn()}}
 }
 \concept{site profiles}

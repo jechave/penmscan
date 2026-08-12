@@ -10,9 +10,9 @@ dgact_dv(prot, ideal, pdb_site_active = NA)
 Activation free energy, internal energy contribution
 }
 \seealso{
-Other enm_energy: 
-\code{\link{dgact_tds}()},
-\code{\link{enm_g_entropy}()},
-\code{\link{enm_v_min}()}
+Other enm_energy:
+\code{\link[=dgact_tds]{dgact_tds()}},
+\code{\link[=enm_g_entropy]{enm_g_entropy()}},
+\code{\link[=enm_v_min]{enm_v_min()}}
 }
 \concept{enm_energy}

@@ -61,8 +61,13 @@ sdmrs_amat <- function(wt, amat, nmut, mut_dl_sigma, mut_sd_min,  option, seed) 
 
   stopifnot(option == "mean_max" | option == "max_max")
 
-  fmati <- generate_fmat_dmrs(wt, nmut, mut_dl_sigma, mut_sd_min, 1 * seed)
-  fmatj <- generate_fmat_dmrs(wt, nmut, mut_dl_sigma, mut_sd_min, 2 * seed)
+  # Two independent ensembles. These were previously separated by scaling the
+  # seed (1 * seed, 2 * seed), whose key sets {seed + j*m} and {2*seed + j*m}
+  # overlap whenever j1*m1 - j2*m2 == seed -- reachable as soon as
+  # nsites * nmut > seed. The ensemble index is now part of the hashed tuple,
+  # so the two ensembles are disjoint for every nsites, nmut and seed.
+  fmati <- generate_fmat_dmrs(wt, nmut, mut_dl_sigma, mut_sd_min, seed, ensemble = 1L)
+  fmatj <- generate_fmat_dmrs(wt, nmut, mut_dl_sigma, mut_sd_min, seed, ensemble = 2L)
 
 
   nsites <- get_nsites(wt)
@@ -109,7 +114,7 @@ sdmrs_amat <- function(wt, amat, nmut, mut_dl_sigma, mut_sd_min,  option, seed) 
 #'
 #' @family mutscan functions
 #'
-generate_fmat_dmrs <- function(wt, nmut, mut_dl_sigma, mut_sd_min,  seed) {
+generate_fmat_dmrs <- function(wt, nmut, mut_dl_sigma, mut_sd_min,  seed, ensemble = 1L) {
   mutation = seq(nmut)
   nsites <- get_nsites(wt)
   nedges <- nrow(get_graph(wt))
@@ -120,9 +125,12 @@ generate_fmat_dmrs <- function(wt, nmut, mut_dl_sigma, mut_sd_min,  seed) {
   fmat <- matrix(NA, 3 * nsites, nsites * nmut)
   dim(fmat) <- c(3 * nsites, nsites, nmut)
 
+  check_seeds_distinct(outer(seq(nsites), mutation,
+                             Vectorize(function(j, m) mut_seed(seed, j, m, ensemble))))
+
   for(j in seq(nsites)) {
     for (m in mutation) {
-      set.seed(seed + j * m)
+      set.seed(mut_seed(seed, j, m, ensemble))
       dlmat[, j, m] <- generate_delta_lij_dmrs(wt, site_mut = j, mut_sd_min, mut_dl_sigma)
       fmat[, j, m] <- calculate_force_dmrs(wt, dlmat[, j, m])
     }
