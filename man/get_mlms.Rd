@@ -18,11 +18,11 @@ the profile of mean-local-mutational-stress (mlms) values
 Calculates the Mean Local Mutational Stress (MLMS) profile using graph of prot object
 }
 \seealso{
-Other site profiles: 
-\code{\link{get_cn}()},
-\code{\link{get_dactive}()},
-\code{\link{get_msf_site}()},
-\code{\link{get_stress}()},
-\code{\link{get_wcn}()}
+Other site profiles:
+\code{\link[=get_cn]{get_cn()}},
+\code{\link[=get_dactive]{get_dactive()}},
+\code{\link[=get_msf_site]{get_msf_site()}},
+\code{\link[=get_stress]{get_stress()}},
+\code{\link[=get_wcn]{get_wcn()}}
 }
 \concept{site profiles}

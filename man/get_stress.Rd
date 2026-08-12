@@ -16,11 +16,11 @@ a vector of site-dependent stress-energy values
 Calculates the sum for each site of the stress energy of each of it's springs at equilibrium
 }
 \seealso{
-Other site profiles: 
-\code{\link{get_cn}()},
-\code{\link{get_dactive}()},
-\code{\link{get_mlms}()},
-\code{\link{get_msf_site}()},
-\code{\link{get_wcn}()}
+Other site profiles:
+\code{\link[=get_cn]{get_cn()}},
+\code{\link[=get_dactive]{get_dactive()}},
+\code{\link[=get_mlms]{get_mlms()}},
+\code{\link[=get_msf_site]{get_msf_site()}},
+\code{\link[=get_wcn]{get_wcn()}}
 }
 \concept{site profiles}

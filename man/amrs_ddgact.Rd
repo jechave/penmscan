@@ -38,13 +38,13 @@ responses <- amrs_ddgact(wt, pdb_site_active,  mut_model = "lfenm", mut_dl_sigma
 
 }
 \seealso{
-Other mutscan functions: 
-\code{\link{admrs}()},
-\code{\link{amrs_ddg}()},
-\code{\link{amrs}()},
-\code{\link{sdmrs}()},
-\code{\link{smrs_ddgact}()},
-\code{\link{smrs_ddg}()},
-\code{\link{smrs}()}
+Other mutscan functions:
+\code{\link[=admrs]{admrs()}},
+\code{\link[=amrs]{amrs()}},
+\code{\link[=amrs_ddg]{amrs_ddg()}},
+\code{\link[=sdmrs]{sdmrs()}},
+\code{\link[=smrs]{smrs()}},
+\code{\link[=smrs_ddg]{smrs_ddg()}},
+\code{\link[=smrs_ddgact]{smrs_ddgact()}}
 }
 \concept{mutscan functions}

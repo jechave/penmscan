@@ -4,10 +4,10 @@ library(jefuns)
 library(bio3d)
 
 
-load(here("data/pdb_2acy_A.rda"))
-load(here("data/wt_sc.rda"))
-load(here("data/mut_sc_lf.rda"))
-# load(here("data/mut_sc_qf.rda"))
+load(test_path("fixtures", "pdb_2acy_A.rda"))
+load(test_path("fixtures", "wt_sc.rda"))
+load(test_path("fixtures", "mut_sc_lf.rda"))
+# load(test_path("fixtures", "mut_sc_qf.rda"))
 
 
 test_that("set_enm gets wt_sc ok", {

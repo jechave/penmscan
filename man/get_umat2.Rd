@@ -16,7 +16,7 @@ a matrix of size nsites x nmodes with contribution of each site to each mode.
 Calculates a matrix of size nsites x nmodes. Element umat2(i,n) is the contribution of site i to mode n (amplitude squared, added over x,y,z)
 }
 \seealso{
-Other site-by-mode matrices: 
-\code{\link{get_msf_site_mode}()}
+Other site-by-mode matrices:
+\code{\link[=get_msf_site_mode]{get_msf_site_mode()}}
 }
 \concept{site-by-mode matrices}

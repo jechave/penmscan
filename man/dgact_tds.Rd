@@ -10,9 +10,9 @@ dgact_tds(prot, ideal, pdb_site_active = NA, beta = beta_boltzmann())
 Activation free energy, entropic contribution
 }
 \seealso{
-Other enm_energy: 
-\code{\link{dgact_dv}()},
-\code{\link{enm_g_entropy}()},
-\code{\link{enm_v_min}()}
+Other enm_energy:
+\code{\link[=dgact_dv]{dgact_dv()}},
+\code{\link[=enm_g_entropy]{enm_g_entropy()}},
+\code{\link[=enm_v_min]{enm_v_min()}}
 }
 \concept{enm_energy}

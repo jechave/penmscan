@@ -16,8 +16,8 @@ a matrix of size nsites x nsites with \eqn{c_{ij} = < d\mathbf{r}_i . d\mathbf{r
 Calculates the reduced covariance matrix (size nsites x nsites)
 }
 \seealso{
-Other site-by-site matrices: 
-\code{\link{get_reduced_kmat}()},
-\code{\link{get_rho_matrix}()}
+Other site-by-site matrices:
+\code{\link[=get_reduced_kmat]{get_reduced_kmat()}},
+\code{\link[=get_rho_matrix]{get_rho_matrix()}}
 }
 \concept{site-by-site matrices}

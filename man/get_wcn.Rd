@@ -16,11 +16,11 @@ a vector of size nsites with wcn values for each site
 Calculates the Weighted Contact Number (WCN) of each site
 }
 \seealso{
-Other site profiles: 
-\code{\link{get_cn}()},
-\code{\link{get_dactive}()},
-\code{\link{get_mlms}()},
-\code{\link{get_msf_site}()},
-\code{\link{get_stress}()}
+Other site profiles:
+\code{\link[=get_cn]{get_cn()}},
+\code{\link[=get_dactive]{get_dactive()}},
+\code{\link[=get_mlms]{get_mlms()}},
+\code{\link[=get_msf_site]{get_msf_site()}},
+\code{\link[=get_stress]{get_stress()}}
 }
 \concept{site profiles}
