@@ -4,8 +4,8 @@ library(bio3d)
 library(jefuns)
 library(penm)
 
-load(here("tests/data/pdb_2acy_A.rda"))
-load(here("tests/data/prot_2acy_A_ming_wall_ca.rda"))
+load(test_path("fixtures", "pdb_2acy_A.rda"))
+load(test_path("fixtures", "prot_2acy_A_ming_wall_ca.rda"))
 
 
 test_that("set_enm gets prot  equal to prot_2acy_A", {

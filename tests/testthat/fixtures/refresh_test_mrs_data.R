@@ -12,16 +12,16 @@ library(Matrix)
 
 
 ## ----------------------------------------------------------------------------------------------------------------------
-load(here("data/wt.rda"))
+load(here("tests/testthat/fixtures/wt.rda"))
 
 mrs_all_output <- mrs_all(wt, nmut = 5, mut_model = "lfenm", mut_dl_sigma = 0.3, mut_sd_min = 1, seed = 1234)
-usethis::use_data(mrs_all_output,  overwrite = TRUE)
+save(mrs_all_output, file = here("tests/testthat/fixtures/mrs_all_output.rda"))
 
 smrs_all_output <- smrs_all(wt, nmut = 5, mut_model = "lfenm", mut_dl_sigma = 0.3, mut_sd_min = 1, seed = 1234)
-usethis::use_data(smrs_all_output,  overwrite = TRUE)
+save(smrs_all_output, file = here("tests/testthat/fixtures/smrs_all_output.rda"))
 
 amrs_all_output <- amrs_all(wt, mut_dl_sigma = 0.3, mut_sd_min = 1)
-usethis::use_data(amrs_all_output,  overwrite = TRUE)
+save(amrs_all_output, file = here("tests/testthat/fixtures/amrs_all_output.rda"))
 
 
 
