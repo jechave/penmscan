@@ -51,7 +51,8 @@ get_mutant_site  mrs_all  old_name  smrs_all
 Decide per object: document it properly, or unexport it if it is internal.
 `old_name` looks like leftover scaffolding worth deleting.
 
-**Undocumented arguments** (WARNING):
+**Undocumented arguments** (WARNING) — the `delta_energy` entry is the same gap
+described from the downstream side in §3b.3:
 - `delta_energy`: `beta`, `ideal`, `pdb_site_active`
 - `delta_structure_by_site`: `kmat_sqrt`
 - `dgact_dv`: `prot`, `ideal`, `pdb_site_active`
@@ -64,6 +65,86 @@ truncated in the PDF manual. Fix by wrapping the roxygen `@examples` source.
 **Stale examples** — `R/mutscan_amrs_ddg.R:23` and `R/mutscan_amrs.R:89` pass
 `seed = 1024` to functions that take no `seed` argument (the analytic functions are
 deterministic). This propagates into `man/amrs_ddg.Rd`.
+
+## 3b. Roxygen for the functions `msamodel` depends on
+
+Downstream brief (from the `msamodel` side). `msamodel` calls exactly these ten,
+and because it re-exports `set_enm()`, penm's pages are what an `msamodel` user
+reads:
+
+```
+set_enm  get_mutant_site  delta_structure_dr2i  delta_structure_dr2n
+ddg_dv  ddg_tds  ddgact_dv  ddgact_tds  get_site  get_pdb_site
+```
+
+Claims below were checked against the source on 2026-08-12; corrections to the
+original brief are marked.
+
+**Correction to the brief:** it says "nine have a man page". In fact only
+`set_enm` has its own `.Rd`. The other eight are exported but share *grouped*
+pages via `@alias` — `delta_energy.Rd`, `delta_structure_by_site.Rd`,
+`delta_structure_by_mode.Rd`, `get_prot_property.Rd` — so `?ddg_dv` resolves,
+but `man/ddg_dv.Rd` does not exist. `get_mutant_site` has nothing at all.
+
+Priority order:
+
+1. **`get_mutant_site` is exported with no documentation.** Confirmed: no
+   `man/get_mutant_site.Rd`, and the roxygen block carries both `@export` and
+   `@noRd`. Needs a page covering: legal `mut_model` values (`"lfenm"` /
+   `"sclfenm"` — anything else hits `stop()` in `R/penm.R`), that
+   `mut_dl_sigma` is the standard deviation of the per-edge equilibrium-length
+   perturbation drawn with `rnorm` (Å), that `mut_sd_min` filters which edges
+   are perturbed by sequence separation (`sdij >= mut_sd_min`), and what `seed`
+   does. Note `mutation = 0` returns `wt` unmutated.
+
+2. **`set_enm` matters most**, since it is the first call a user makes. The page
+   exists but its `\item`s restate the argument names — e.g. *"d_max: distance
+   cutoff used to define enm contacts"*. It should say what a node is under each
+   `node` value, what distinguishes the six `model` values, what units `d_max`
+   is in with a workable value per node type (~10.5 Å for `ca`, ~12.5 Å for
+   `sc`), and what `frustrated` changes.
+
+   Two things the brief does not mention, both verified:
+   - `set_enm()` has **no defaults on any argument**; all five are required.
+     That makes documenting workable values more pressing, not less.
+   - `R/enm.R:29` is `stopifnot(!frustrated)`, so **`frustrated = TRUE`
+     currently errors**. The page must say the `TRUE` branch is disabled rather
+     than describe what it would do.
+
+   No input validation: a non-pdb argument fails with a message naming an
+   internal generic. Reproduced exactly —
+
+   ```
+   set_enm(data.frame(x = 1), node = "ca", model = "ming_wall",
+           d_max = 10.5, frustrated = FALSE)
+   #> no applicable method for 'atom.select' applied to an object of class "data.frame"
+   ```
+
+   A clear error naming the expected class belongs in penm, not in a downstream
+   wrapper. (`msamodel`'s wrapper doing this was deleted on that side.)
+
+3. **`delta_energy.Rd` documents only `wt` and `mut`**, but `\usage` shows
+   `beta`, `ideal` and `pdb_site_active` — three arguments described nowhere.
+   Confirmed. `pdb_site_active` is how a user names the active site and defaults
+   to `NA`. Typo on the same page: *"entropic free energ difference"*.
+
+4. **`delta_structure_by_site.Rd` / `by_mode.Rd`** already give the math (`dr2i`
+   is the square of `Cf`). Add units, and the fact that `dr2i` and `dr2n` are
+   the same displacement expressed in two bases, so for a single mutant they sum
+   to the same total — verified numerically downstream in `msamodel`
+   (`all.equal` TRUE, relative difference 4e-14). Typos confirmed in
+   `delta_structure_by_mode.Rd`: *"de square"* on lines 28, 30 and 32 (three
+   occurrences, not two), and *"vecgtor"* on line 32.
+
+5. **`get_site` / `get_pdb_site` share `get_prot_property.Rd`**, which documents
+   only `prot`. It does not currently distinguish the internal sequential index
+   from the PDB numbering — a distinction that causes confusion downstream, so
+   it should be stated explicitly on that page.
+
+Standard for this work: say what each function does and what each argument
+means, with units and legal values where they exist. Verify every claim against
+the source; if a claim cannot be verified, say so rather than writing something
+plausible.
 
 ## 4. Other `R CMD check` notes
 
