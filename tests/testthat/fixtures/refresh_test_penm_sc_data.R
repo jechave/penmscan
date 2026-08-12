@@ -23,7 +23,7 @@ mut_sc_lf  <- get_mutant_site(wt_sc, site_mut = 80, mutation = 1,
 save(mut_sc_lf, file = here("tests/testthat/fixtures/mut_sc_lf.rda"))
 
 ## ----------------------------------------------------------------------------------------------------------------------
-skip <-  FALSE
+skip <-  TRUE
 if (!skip) {
   mut_sc_qf <- get_mutant_site(wt_sc, site_mut = 80, mutation = 1,
                             mut_model = "sclfenm", mut_dl_sigma = 0.3, mut_sd_min = 1)
