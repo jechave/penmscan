@@ -1,4 +1,4 @@
-#' Gather all imports for package penm
+#' Gather all imports for package penmscan
 #'
 #' @importFrom stats rnorm
 #' @importFrom digest digest

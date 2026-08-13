@@ -1,4 +1,4 @@
 library(testthat)
-library(penm)
+library(penmscan)
 
-test_check("penm")
+test_check("penmscan")

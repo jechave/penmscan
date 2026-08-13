@@ -16,7 +16,7 @@ library(tidyverse)
 library(ggridges)
 library(cowplot)
 library(bio3d)
-library(penm)
+library(penmscan)
 library(jefuns)
 library(here)
 

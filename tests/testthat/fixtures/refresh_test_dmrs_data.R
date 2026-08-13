@@ -4,7 +4,7 @@
 # load libraries
 library(tidyverse)
 library(bio3d)
-library(penm)
+library(penmscan)
 library(jefuns)
 library(here)
 library(tictoc)

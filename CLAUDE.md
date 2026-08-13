@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Package Overview
 
-The `penm` package (Perturbing Elastic Network Models) is an R package for building and analyzing Elastic Network Models (ENMs) of proteins. It performs mutation scanning and calculates mutation-response matrices for protein structure analysis.
+The `penmscan` package (Perturbing Elastic Network Models) is an R package for building and analyzing Elastic Network Models (ENMs) of proteins. It performs mutation scanning and calculates mutation-response matrices for protein structure analysis.
 
 ## Development Commands
 
@@ -15,7 +15,7 @@ R CMD INSTALL .
 
 # Build and check the package
 R CMD build .
-R CMD check penm_*.tar.gz
+R CMD check penmscan_*.tar.gz
 
 # Install using devtools (recommended for development)
 Rscript -e "devtools::install()"
@@ -61,9 +61,13 @@ Rscript -e "pkgdown::build_site()"
    - **Analytical methods** (`R/mutscan_amrs.R`, `R/mutscan_admrs.R`):
      - `amrs()`: Single-site mutation response scanning
      - `admrs()`: Double-site mutation response (compensation matrices)
+     - `amrs_ddg()`: Analytical stability change (ΔΔG) profiles
+     - `amrs_ddgact()`: Analytical activation energy change profiles
    - **Simulation methods** (`R/mutscan_smrs.R`, `R/mutscan_sdmrs.R`):
      - `smrs()`: Monte Carlo simulation of mutation responses
      - `sdmrs()`: Simulation-based double mutation scanning
+     - `smrs_ddg()`: Simulation-based stability change profiles
+     - `smrs_ddgact()`: Simulation-based activation energy profiles
 
 4. **Response Calculations**
    - Three response types calculated:
@@ -100,6 +104,8 @@ Test data can be refreshed using scripts in `tests/R/`:
 - `refresh_test_enm_data.R`
 - `refresh_test_penm_data.R`
 - `refresh_test_penm_sc_data.R`
+- `refresh_test_mrs_data.R`
+- `refresh_test_dmrs_data.R`
 
 ### Important Parameters
 

@@ -18,7 +18,7 @@ library(tidyverse)
 library(ggridges)
 library(cowplot)
 library(bio3d)
-library(penm)
+library(penmscan)
 library(jefuns)
 
 # source functions to use in this script

@@ -69,7 +69,7 @@ deterministic). This propagates into `man/amrs_ddg.Rd`.
 ## 3b. Roxygen for the functions `msamodel` depends on
 
 Downstream brief (from the `msamodel` side). `msamodel` calls exactly these ten,
-and because it re-exports `set_enm()`, penm's pages are what an `msamodel` user
+and because it re-exports `set_enm()`, penmscan's pages are what an `msamodel` user
 reads:
 
 ```
@@ -120,7 +120,7 @@ Priority order:
    #> no applicable method for 'atom.select' applied to an object of class "data.frame"
    ```
 
-   A clear error naming the expected class belongs in penm, not in a downstream
+   A clear error naming the expected class belongs in penmscan, not in a downstream
    wrapper. (`msamodel`'s wrapper doing this was deleted on that side.)
 
 3. **`delta_energy.Rd` documents only `wt` and `mut`**, but `\usage` shows
@@ -151,8 +151,9 @@ plausible.
 - **`no visible binding for global variable`** — several hundred, from tidyverse
   NSE (`i`, `j`, `dr2ij`, `mij`, …). Standard fix is a
   `utils::globalVariables()` call in one file.
-- **Non-standard files at top level** — `CLAUDE.md`, `penm_0.2.0.9000.pdf`,
-  `penm_0.2.0.pdf`. Add to `.Rbuildignore`.
+- **Non-standard files at top level** — `CLAUDE.md`. Add to `.Rbuildignore`.
+  (The stale `penm_0.2.0.9000.pdf` / `penm_0.2.0.pdf` manuals were deleted in the
+  penmscan rename.)
 - **Hidden directory `.claude`** — add to `.Rbuildignore`.
 - **Unstated dependencies in tests** — `here`, `tictoc`, `tidyverse` are called
   via `library()` in test files but not declared in `Suggests`.

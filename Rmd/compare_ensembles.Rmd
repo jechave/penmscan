@@ -1,5 +1,5 @@
 ---
-title: "Test penm modeule of penm package"
+title: "Test penm modeule of penmscan package"
 author: "Julian Echave"
 date: "4/25/2020"
 output: html_document
@@ -19,7 +19,7 @@ library(ggridges)
 library(cowplot)
 library(patchwork)
 library(bio3d)
-library(penm)
+library(penmscan)
 library(jefuns)
 ```
 

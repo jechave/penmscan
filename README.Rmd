@@ -1,5 +1,5 @@
 ---
-title: "penm package"
+title: "penmscan package"
 author: "Julian Echave"
 date: "26/09/2022"
 output:  github_document
@@ -17,8 +17,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-The `penm` package contains functions to build Elastic Network Models (ENM) of 
-proteins and to perturb them; 
+The `penmscan` package contains functions to build Elastic Network Models (ENM) of
+proteins and to perturb them;
 `penm` stands for Perturbing Elastic Network Models.
 
 
@@ -33,13 +33,13 @@ In short:
 
 
 # Installation
-Install packages `penm` (this package) and `jefuns` (miscelaneous functions, some of which `penm` uses).
+Install packages `penmscan` (this package) and `jefuns` (miscelaneous functions, some of which `penmscan` uses).
 
 ```
 # install.packages("devtools")
 
 devtools::install_github("jechave/jefuns")
-devtools::install_github("jechave/penm")
+devtools::install_github("jechave/penmscan")
 ```
 # Getting started
 
@@ -49,7 +49,7 @@ Before using the package, it needs to be loaded. To run this file, also load the
 library(tidyverse)  
 library(patchwork)  
 library(jefuns)
-library(penm)
+library(penmscan)
 ```
 
 

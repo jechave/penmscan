@@ -2,7 +2,7 @@ library(here)
 library(tidyverse)
 library(bio3d)
 library(jefuns)
-library(penm)
+library(penmscan)
 
 load(test_path("fixtures", "pdb_2acy_A.rda"))
 load(test_path("fixtures", "prot_2acy_A_ming_wall_ca.rda"))

@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 library(here)
 library(patchwork)
-library(penm)
+library(penmscan)
 
 ```
 

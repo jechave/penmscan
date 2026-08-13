@@ -1,5 +1,5 @@
 ---
-title: "Perturbation Response Scanning using penm"
+title: "Perturbation Response Scanning using penmscan"
 author: "Julian Echave"
 date: "5/12/2020"
 output: ioslides_presentation
@@ -18,7 +18,7 @@ library(ggridges)
 library(cowplot)
 library(bio3d)
 library(here)
-library(penm)
+library(penmscan)
 library(jefuns)
 
 # source functions to use in this script

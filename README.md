@@ -1,35 +1,35 @@
-penm package
+penmscan package
 ================
 Julian Echave
 26/09/2022
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-The `penm` package contains functions to build Elastic Network Models
-(ENM) of proteins and to perturb them; `penm` stands for Perturbing
-Elastic Network Models.
+The `penmscan` package contains functions to build Elastic Network
+Models (ENM) of proteins and to perturb them; `penm` stands for
+Perturbing Elastic Network Models.
 
 # Overview
 
 In short:
 
--   `bio3d::read.pdb()`: Set up a **pdb** protein object.
--   `set_enm()`: Set up a `penm` **prot** object, containing protein and
-    its ENM info.
--   `amrs()`and `smrs()`: perform single-mutation scans to calculate
-    mutation-response matrices.
--   `admrs()`and `sdmrs()`: perform double-mutation scans to calculate
-    compensation matrices.
+- `bio3d::read.pdb()`: Set up a **pdb** protein object.
+- `set_enm()`: Set up a `penm` **prot** object, containing protein and
+  its ENM info.
+- `amrs()`and `smrs()`: perform single-mutation scans to calculate
+  mutation-response matrices.
+- `admrs()`and `sdmrs()`: perform double-mutation scans to calculate
+  compensation matrices.
 
 # Installation
 
-Install packages `penm` (this package) and `jefuns` (miscelaneous
-functions, some of which `penm` uses).
+Install packages `penmscan` (this package) and `jefuns` (miscelaneous
+functions, some of which `penmscan` uses).
 
     # install.packages("devtools")
 
     devtools::install_github("jechave/jefuns")
-    devtools::install_github("jechave/penm")
+    devtools::install_github("jechave/penmscan")
 
 # Getting started
 
@@ -38,17 +38,19 @@ load the following packages: `tidyverse`, `patchwork`, and `jefuns`.
 
 ``` r
 library(tidyverse)  
-#> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-#> ✔ ggplot2 3.3.6      ✔ purrr   0.3.4 
-#> ✔ tibble  3.1.8      ✔ dplyr   1.0.10
-#> ✔ tidyr   1.2.1      ✔ stringr 1.4.0 
-#> ✔ readr   2.1.2      ✔ forcats 0.5.1
+#> ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+#> ✔ dplyr     1.1.4     ✔ readr     2.1.4
+#> ✔ forcats   1.0.0     ✔ stringr   1.6.0
+#> ✔ ggplot2   4.0.1     ✔ tibble    3.3.0
+#> ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+#> ✔ purrr     1.2.0     
 #> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 #> ✖ dplyr::filter() masks stats::filter()
 #> ✖ dplyr::lag()    masks stats::lag()
+#> ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 library(patchwork)  
 library(jefuns)
-library(penm)
+library(penmscan)
 ```
 
 ## Set up the ENM for a protein
@@ -64,13 +66,11 @@ wt <- set_enm(pdb, node = "calpha", model = "anm", d_max = 10.5, frustrated = FA
 ```
 
 `wt` created here by `set_enm()` is an object of class *prot*. In this
-example, network nodes are placed at
-![C\_\alpha](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;C_%5Calpha "C_\alpha")
-coordinates, the model used is Bahar’s Anisotropic Network Model
-(`model = "anm"`) with a cut-off distance to define contacts of
-`d_max = 10.5`. `frustrated` indicates whether to add frustrations to
-the model (it defaults to `FALSE`, it may be ommited from the list of
-arguments).
+example, network nodes are placed at $`C_\alpha`$ coordinates, the model
+used is Bahar’s Anisotropic Network Model (`model = "anm"`) with a
+cut-off distance to define contacts of `d_max = 10.5`. `frustrated`
+indicates whether to add frustrations to the model (it defaults to
+`FALSE`, it may be ommited from the list of arguments).
 
 The object `wt` created above is a list that contains several
 components:
@@ -108,19 +108,18 @@ str(wt) # show structure of the object created
 #>  - attr(*, "class")= chr [1:2] "prot" "list"
 ```
 
--   `wt$param` is a list of model parameters
--   `wt$nodes` has information on number of sites, site-indexes,
-    B-factors, and cartesian coordinates of the nodes
--   `wt$graph` is a graph representation of the elastic network (used
-    internally)
--   `wt$eij` is a matrix of unit vectors directed along contacts (used
-    internally)
--   `wt$kmat` is the network’s matrix (also called the Hessian,
-    Laplacian, or Kirchhoff matrix)
--   `wt$nma` has various properties obtained from a so called
-    “normal-mode analysis”: mode index, eigenvalues (`evalue`), matrix
-    of eigenvectors (`umat`), and the ENM’s variance covariance matrix
-    (`cmat`).
+- `wt$param` is a list of model parameters
+- `wt$nodes` has information on number of sites, site-indexes,
+  B-factors, and cartesian coordinates of the nodes
+- `wt$graph` is a graph representation of the elastic network (used
+  internally)
+- `wt$eij` is a matrix of unit vectors directed along contacts (used
+  internally)
+- `wt$kmat` is the network’s matrix (also called the Hessian, Laplacian,
+  or Kirchhoff matrix)
+- `wt$nma` has various properties obtained from a so called “normal-mode
+  analysis”: mode index, eigenvalues (`evalue`), matrix of eigenvectors
+  (`umat`), and the ENM’s variance covariance matrix (`cmat`).
 
 ## Single-site mutation-response scanning
 
@@ -156,16 +155,16 @@ p_analytical + p_simulation
 
 There are three possible responses that can be calculated:
 
--   `response = "dr2"` (structural deformations): Matrix element
-    `m[i,j]` represents the square distance between site `i` of the
-    wild-type protein and site `i` of the mutant, averaged over
-    mutations at site `j`.
--   `response = "de2"` (deformation energy): `m[i,j]` is the mechanical
-    energy needed to movoe site `i` back to its unperturbed position,
-    averaged over mutations at site `j`).
--   `response = "df2"` (force): `m[i,j]` is the square-length of the
-    mechanical force vector acting on site `i`, averaged over mutations
-    at site `j`).
+- `response = "dr2"` (structural deformations): Matrix element `m[i,j]`
+  represents the square distance between site `i` of the wild-type
+  protein and site `i` of the mutant, averaged over mutations at site
+  `j`.
+- `response = "de2"` (deformation energy): `m[i,j]` is the mechanical
+  energy needed to movoe site `i` back to its unperturbed position,
+  averaged over mutations at site `j`).
+- `response = "df2"` (force): `m[i,j]` is the square-length of the
+  mechanical force vector acting on site `i`, averaged over mutations at
+  site `j`).
 
 ``` r
 # Calculate analytical mutation-response matrix for deformations (response = "dr2")

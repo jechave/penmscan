@@ -1,4 +1,4 @@
-Package: penm
+Package: penmscan
 Type: Package
 Title: Build and Perturb Elastic Network Models
 Version: 0.2.0.9000
